@@ -52,7 +52,7 @@ public class AccionSalir extends AbstractAction
     public void actionPerformed(ActionEvent e)
     {
         int opcion = JOptionPane.showConfirmDialog(
-                padre, "�Seguro que desea salir?");
+                padre, "¿Seguro que desea salir?");
 
         if (opcion == JOptionPane.YES_OPTION)
         {

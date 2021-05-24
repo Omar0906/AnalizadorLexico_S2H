@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
 
 
@@ -73,7 +74,7 @@ public abstract class AbstractAccionFichero extends AbstractAction
         {
             fileChooser = new JFileChooser();
         }
-
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Programa S2H", "s2h"));
         int opcionSeleccionada;
 
         // Se muestra el FileChooser como dialogo de salvar o de cargar seg�n la opci�n
