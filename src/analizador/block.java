@@ -1037,6 +1037,8 @@ public class block extends javax.swing.JFrame {
                 }
                 e = false;
                 activar();
+                tablaSimbolos.clear();
+                modelo.setRowCount(0);
                 return;
             }
         } catch (FileNotFoundException ex) {
