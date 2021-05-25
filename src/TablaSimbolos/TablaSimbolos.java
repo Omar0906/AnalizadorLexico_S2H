@@ -8,7 +8,7 @@ public class TablaSimbolos {
     private ArrayList<Tokens> ListaTokens;
 
     public TablaSimbolos() {
-        ListaTokens = new ArrayList<Tokens>();
+        this.ListaTokens = new ArrayList<Tokens>();
     }
 
     public void addToken(Tokens t) {
@@ -21,10 +21,16 @@ public class TablaSimbolos {
     public void sortTabla() {
         Collections.sort(ListaTokens);
     }
+    public void clear(){
+        this.ListaTokens.clear();
+    }
 
     public Boolean buscarToken(Tokens t) {
-        for (Tokens tokens : ListaTokens) {
-            if (tokens.getLexema() == t.getLexema()) {
+        if(this.ListaTokens.isEmpty()){
+            return false;
+        }
+        for (Tokens tokens : this.ListaTokens) {
+            if (tokens.getLexema().equals(t.getLexema())) {
                 return true;
             }
         }
