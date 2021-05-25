@@ -167,7 +167,7 @@ public class block extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         btnCompilar = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        jButton6 = new javax.swing.JButton();
+        btnTablaSimbolos = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnNuevo = new javax.swing.JMenuItem();
@@ -187,6 +187,8 @@ public class block extends javax.swing.JFrame {
         btnTodos = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         btnEstilos = new javax.swing.JMenuItem();
+        mnuAyudaG = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         dBuscar.setTitle("Buscar");
         dBuscar.setAlwaysOnTop(true);
@@ -655,17 +657,17 @@ public class block extends javax.swing.JFrame {
         jToolBar1.add(btnCompilar);
         jToolBar1.add(jSeparator3);
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton6.setText("Tabla de Símbolos");
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnTablaSimbolos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnTablaSimbolos.setText("Tabla de Símbolos");
+        btnTablaSimbolos.setFocusable(false);
+        btnTablaSimbolos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTablaSimbolos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTablaSimbolos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnTablaSimbolosActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton6);
+        jToolBar1.add(btnTablaSimbolos);
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
@@ -810,10 +812,27 @@ public class block extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        mnuAyudaG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/if_164_QuestionMark_183285.png"))); // NOI18N
+        mnuAyudaG.setText("Ayuda");
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnuAyudaG.add(jMenuItem1);
+
+        jMenuBar1.add(mnuAyudaG);
+
         setJMenuBar(jMenuBar1);
 
         setBounds(0, 0, 918, 626);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGCActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnGCActionPerformed
         guardarComo();
@@ -979,76 +998,7 @@ public class block extends javax.swing.JFrame {
     }
 
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAbrirActionPerformed
-        if (a != null && e == true) {
-            Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
-            int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar los cambios en " + getTitle(),
-                    "Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
-                    "Guardar");
-            switch (eleccion) {
-                case 0:
-                    guardar();
-                    break;
-                case 1:
-                    txtBlock.setText("");
-                    break;
-                case 2:
-                    return;
-                default:
-                    break;
-            }
-        } else if (a == null && e == true) {
-            Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
-            int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar el archivo " + getTitle(),
-                    "Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
-                    "Guardar");
-            switch (eleccion) {
-                case 0:
-                    guardar();
-                    break;
-                case 1:
-                    txtBlock.setText("");
-                    break;
-                case 2:
-                    return;
-                default:
-                    break;
-            }
-            c = false;
-        }
-        try {
-            JFileChooser chooser = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("Programa Speak2Home", "s2h");
-            chooser.setFileFilter(filter);
-            int returnVal = chooser.showOpenDialog(this);
-            if (returnVal == JFileChooser.ABORT) {
-                txtBlock.setText("");
-                a = null;
-            }
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File archivo = chooser.getSelectedFile();
-                Charset charset = Charset.forName("ISO-8859-1");
-                // titulo=titulo.substring(0, titulo.length()-4);
-                setTitle(a.getName());
-                a = archivo;
-                txtBlock.setText("");
-                List<String> tex = Files.readAllLines(archivo.toPath(), charset);
-                for (String line : tex) {
-                    txtBlock.setText(txtBlock.getText() + line + "\n");
-                }
-                e = false;
-                activar();
-                tablaSimbolos.clear();
-                modelo.setRowCount(0);
-                return;
-            }
-        } catch (FileNotFoundException ex) {
-            javax.swing.JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-        } catch (IOException ex) {
-            javax.swing.JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-        }
-        activar();
-
-        c = false;
+        abrirArchivo();
     }// GEN-LAST:event_btnAbrirActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnGuardarActionPerformed
@@ -1440,6 +1390,9 @@ public class block extends javax.swing.JFrame {
     }// GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
+        abrirArchivo();
+    }// GEN-LAST:event_jButton3ActionPerformed
+    private void abrirArchivo(){
         if (a != null && e == true) {
             Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar los cambios en " + getTitle(),
@@ -1498,9 +1451,8 @@ public class block extends javax.swing.JFrame {
                 }
                 e = false;
                 activar();
-
-                tablaSimbolos.clear();
                 modelo.setRowCount(0);
+                tablaSimbolos.clear();
                 return;
             }
         } catch (FileNotFoundException ex) {
@@ -1509,9 +1461,9 @@ public class block extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
         activar();
-        c = false;
-    }// GEN-LAST:event_jButton3ActionPerformed
 
+        c = false;
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
         guardarComo();
     }// GEN-LAST:event_jButton2ActionPerformed
@@ -1543,7 +1495,7 @@ public class block extends javax.swing.JFrame {
                     if (token.isPrintable()) {
                         listaTemp.add(token);
 
-                        if (!tablaSimbolos.buscarToken(token) && token.getToken() == "IDENTIFICADOR") {
+                        if (!tablaSimbolos.buscarToken(token)&&token.isID()) {
                             tablaSimbolos.addToken(token);
                         }
                     }
@@ -1552,11 +1504,6 @@ public class block extends javax.swing.JFrame {
                     }
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
-                    /*
-                     * for (Object[] objects : listaTemp) {
-                     * System.out.println(" "+objects[0]+", "+objects[1]+", "+objects[2]+", "
-                     * +objects[3]); }
-                     */
                 }
                 actualizarTabla(listaTemp, listaErrorsTemp);
             }
@@ -1581,6 +1528,10 @@ public class block extends javax.swing.JFrame {
         }
     }
 
+    private void agregarTablaSimbolos(Tokens simbolo) {
+
+    }
+
     private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCompilarActionPerformed
         if (a == null) {
             guardarComo();
@@ -1592,11 +1543,7 @@ public class block extends javax.swing.JFrame {
         analizarLexico();
     }// GEN-LAST:event_btnCompilarActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_btnEliminarActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton6ActionPerformed
+    private void btnTablaSimbolosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton6ActionPerformed
         new Tabla_Simbolos(this, tablaSimbolos).setVisible(true);
     }// GEN-LAST:event_jButton6ActionPerformed
 
@@ -1605,7 +1552,7 @@ public class block extends javax.swing.JFrame {
     }// GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void mnuAyudaActionPerformed(java.awt.event.ActionEvent evt) {
-
+        new About(this, true).setVisible(true);
     }
 
     /**
@@ -1690,6 +1637,7 @@ public class block extends javax.swing.JFrame {
     private javax.swing.JButton btnSNext;
     private javax.swing.JMenuItem btnSalir;
     private javax.swing.JButton btnSiguiente;
+    private javax.swing.JButton btnTablaSimbolos;
     private javax.swing.JMenuItem btnTodos;
     private javax.swing.JButton btncan;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -1705,7 +1653,6 @@ public class block extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JDialog jDFormato;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -1717,6 +1664,7 @@ public class block extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1728,6 +1676,7 @@ public class block extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblBuscar;
+    private javax.swing.JMenu mnuAyudaG;
     private javax.swing.JRadioButton rbtnAbajo;
     private javax.swing.JRadioButton rbtnArriba;
     private javax.swing.JTable tblLexico;

@@ -83,6 +83,12 @@ public class Tokens implements Comparable<Tokens> {
   public void setMsgError(String msg){
     this._msg = msg;
   }
+  public boolean isID(){
+      if(this._token == "IDENTIFICADOR"){
+          return true;
+      }
+      return false;
+  }
   @Override
   public String toString() {
     return "Lexema: " + this._lexema + " Token: " + this._token + " Fila: " + this._row + " Columna: " + this._column
