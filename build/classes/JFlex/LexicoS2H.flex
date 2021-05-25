@@ -92,6 +92,7 @@ SaltoDeLinea = \n|\r|\r\n
 
 //Para los errores
 NUM_ERROR = ({Digito}+ {Letra}+ {Digito}*)+
+FLOAT_ERROR = {Flotante} ("."* {Digito})+
 
 InputCharacter = [^\r\n]
 Comentarios = {TraditionalComentarios} | {EOLComentarios} | {DocumentationComentarios}
@@ -207,6 +208,11 @@ ComentariosContent = ( [^*] | \*+ [^/*] )*
 }
 {NUM_ERROR} {
     Tokens t = new Tokens (yyline+1,yycolumn+1,true,"Número inválido ("+ yytext() +") en: " + yyline + ", columna: " + yycolumn);
+    this._existenTokens = true;
+    return t;
+}
+{FLOAT_ERROR} {
+    Tokens t = new Tokens (yyline+1,yycolumn+1,true,"Número flotante inválido ("+ yytext() +") en: " + yyline + ", columna: " + yycolumn);
     this._existenTokens = true;
     return t;
 }
