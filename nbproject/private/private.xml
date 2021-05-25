@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Documents/Programacion/Java/AnalizadorLexico_S2H/src/JFlex/LexicoS2H.flex</file>
             <file>file:/D:/Documents/Programacion/Java/AnalizadorLexico_S2H/src/analizador/block.java</file>
+            <file>file:/D:/Documents/Programacion/Java/AnalizadorLexico_S2H/src/JFlex/LexicoS2H.java</file>
+            <file>file:/D:/Documents/Programacion/Java/AnalizadorLexico_S2H/src/TablaSimbolos/TablaSimbolos.java</file>
+            <file>file:/D:/Documents/Programacion/Java/AnalizadorLexico_S2H/src/JFlex/Tokens.java</file>
         </group>
     </open-files>
 </project-private>
