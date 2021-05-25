@@ -48,7 +48,6 @@ import TablaSimbolos.TablaSimbolos;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Torres
@@ -865,7 +864,7 @@ public class block extends javax.swing.JFrame {
                 Logger.getLogger(block.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (e == true) {
-            Object[] opciones = { "Guardar", "No guardar", "Cancelar" };
+            Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar el archivo " + getTitle(),
                     "Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
                     "Guardar");
@@ -902,7 +901,7 @@ public class block extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnNuevoActionPerformed
         if (a != null && e == true) {
-            Object[] opciones = { "Guardar", "No guardar", "Cancelar" };
+            Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar los cambios en " + getTitle(),
                     "Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
                     "Guardar");
@@ -927,7 +926,7 @@ public class block extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowClosing
         if (a != null && e == true) {
-            Object[] opciones = { "Guardar", "No guardar", "Cancelar" };
+            Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar los cambios en " + getTitle(),
                     "Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
                     "Guardar");
@@ -986,7 +985,7 @@ public class block extends javax.swing.JFrame {
 
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAbrirActionPerformed
         if (a != null && e == true) {
-            Object[] opciones = { "Guardar", "No guardar", "Cancelar" };
+            Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar los cambios en " + getTitle(),
                     "Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
                     "Guardar");
@@ -1003,7 +1002,7 @@ public class block extends javax.swing.JFrame {
                     break;
             }
         } else if (a == null && e == true) {
-            Object[] opciones = { "Guardar", "No guardar", "Cancelar" };
+            Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar el archivo " + getTitle(),
                     "Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
                     "Guardar");
@@ -1043,6 +1042,8 @@ public class block extends javax.swing.JFrame {
                 }
                 e = false;
                 activar();
+                tablaSimbolos.clear();
+                modelo.setRowCount(0);
                 return;
             }
         } catch (FileNotFoundException ex) {
@@ -1066,7 +1067,7 @@ public class block extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSalirActionPerformed
         if (a != null && e == true) {
-            Object[] opciones = { "Guardar", "No guardar", "Cancelar" };
+            Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar los cambios en " + getTitle(),
                     "Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
                     "Guardar");
@@ -1258,7 +1259,7 @@ public class block extends javax.swing.JFrame {
             if (!reemplazarTot) {
                 dBuscar.setAlwaysOnTop(false);
                 dReemplazar.setAlwaysOnTop(false);
-                Object[] options = { "Aceptar" };
+                Object[] options = {"Aceptar"};
                 JOptionPane.showOptionDialog(this, "No se encontró \"" + pBuscada + "\"", "Bloc de Notas",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
                 cBusca = 0;
@@ -1445,7 +1446,7 @@ public class block extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
         if (a != null && e == true) {
-            Object[] opciones = { "Guardar", "No guardar", "Cancelar" };
+            Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar los cambios en " + getTitle(),
                     "Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
                     "Guardar");
@@ -1462,7 +1463,7 @@ public class block extends javax.swing.JFrame {
                     break;
             }
         } else if (a == null && e == true) {
-            Object[] opciones = { "Guardar", "No guardar", "Cancelar" };
+            Object[] opciones = {"Guardar", "No guardar", "Cancelar"};
             int eleccion = JOptionPane.showOptionDialog(this, "Quieres guardar el archivo " + getTitle(),
                     "Mensaje de Confirmacion", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones,
                     "Guardar");
@@ -1672,7 +1673,7 @@ public class block extends javax.swing.JFrame {
     private String reemplazar = "";
     private Font actual;
     private UndoManager undo = new UndoManager();
-    private final String[] columnNames = { "Lexema", "Componente Léxico", "Fila", "Columna" };
+    private final String[] columnNames = {"Lexema", "Componente Léxico", "Fila", "Columna"};
     private DefaultTableModel modelo;
     private TablaSimbolos tablaSimbolos;
     // Variables declaration - do not modify//GEN-BEGIN:variables
