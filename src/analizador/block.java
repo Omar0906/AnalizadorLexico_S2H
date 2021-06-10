@@ -1517,7 +1517,7 @@ public class block extends javax.swing.JFrame {
         this.modelo.setRowCount(0);
         txtErrores.setText("");
         for (Tokens objeto : temp) {
-            this.modelo.addRow(objeto.tokenObject());
+            this.modelo.addRow(objeto.tokenLexico());
         }
         if (errores.isEmpty()) {
             this.txtErrores.setText("No fueron encontrados errores léxicos");
@@ -1525,6 +1525,12 @@ public class block extends javax.swing.JFrame {
             for (String s : errores) {
                 this.txtErrores.append(s + "\n");
             }
+            if(errores.size() == 1){
+                this.txtErrores.append("Se ha encontrado 1 error.");
+            }else{
+                this.txtErrores.append("Se han encontrado " + errores.size() + " errores.");
+            }
+            
         }
     }
 
@@ -1550,10 +1556,6 @@ public class block extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
 
     }// GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void mnuAyudaActionPerformed(java.awt.event.ActionEvent evt) {
-        new About(this, true).setVisible(true);
-    }
 
     /**
      * @param args the command line arguments
@@ -1615,7 +1617,7 @@ public class block extends javax.swing.JFrame {
     private UndoManager undo = new UndoManager();
     private final String[] columnNames = {"Lexema", "Componente Léxico", "Fila", "Columna"};
     private DefaultTableModel modelo;
-    private TablaSimbolos tablaSimbolos;
+    private TablaSimbolos tablaSimbolos = new TablaSimbolos();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem btnAbrir;
     private javax.swing.JButton btnAceptar;

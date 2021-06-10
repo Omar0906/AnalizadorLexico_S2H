@@ -14,7 +14,7 @@ import JFlex.Tokens;
 import TablaSimbolos.TablaSimbolos;
 
 public class Tabla_Simbolos extends javax.swing.JFrame {
-    String[] columnNames = {"Lexema","Componente Léxico","Fila","Columna"};
+    String[] columnNames = {"Identificador","Fila","Columna"};
     public Tabla_Simbolos(JFrame padre,TablaSimbolos simbolos) {
         this.setLocation(150, 150);
         initComponents();
