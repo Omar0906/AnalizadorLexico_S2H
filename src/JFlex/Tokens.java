@@ -6,9 +6,11 @@ public class Tokens implements Comparable<Tokens> {
   String _lexema;
   int _column;
   int _row;
+  String _tipo;
   boolean _impr;
   boolean _error;
   String _msg;
+  int errorCode;
 
   Tokens(String lexema, String token, int row, int column, boolean impr) {
     this._lexema = lexema.trim();
@@ -18,8 +20,10 @@ public class Tokens implements Comparable<Tokens> {
     this._impr = impr;
     this._error = false;
     this._msg = "";
+    this.errorCode = 0;
+    this._tipo = "";
   }
-  Tokens(int row, int column,boolean error,String msg) {
+  Tokens(int row, int column,boolean error,int errorCode,String msg) {
     this._lexema = "";
     this._token = "";
     this._column = column;
@@ -27,6 +31,14 @@ public class Tokens implements Comparable<Tokens> {
     this._impr = false;
     this._error = error;
     this._msg = msg;
+    this.errorCode = errorCode;
+    this._tipo = "";
+  }
+  public String getTipo(){
+      return this._tipo;
+  }
+  public void setTipo(String tipo){
+      this._tipo = tipo;
   }
   public String getLexema() {
     return this._lexema;
@@ -101,7 +113,11 @@ public class Tokens implements Comparable<Tokens> {
   }
 
   public Object[] tokenObject() {
-    Object[] temp = { this._lexema, this._token, this._row, this._column };
+    Object[] temp = { this._lexema, this._row, this._column };
     return temp;
+  }
+  public Object[] tokenLexico(){
+      Object[] temp = {this._lexema,this._token,this._row,this._column};
+      return temp;
   }
 }

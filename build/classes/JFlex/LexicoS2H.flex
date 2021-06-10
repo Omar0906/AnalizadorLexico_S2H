@@ -21,7 +21,7 @@
 %eof}
 
 //Componentes Lexicos -> Palabras Reservadas
-PALABRA_RESERVADA = {PR_AIR}|{PR_AT}|{PR_BEGIN}|{PR_BEGINPROC}|{PR_BEGINVAR}|{PR_BOOL}|{PR_BREAK}|{PR_CLOCK}|{PR_DEC}|{PR_DEF}|{PR_DISJOIN}|{PR_END}|{PR_ENDPROC}|{PR_ENDVAR}|{PR_FALSE}|{PR_FLOAT}|{PR_GATE}|{PR_INC}|{PR_INT}|{PR_IS}|{PR_JOIN}|{PR_LIGHTB}|{PR_MODE}|{PR_MODE}|{PR_NOT}|{PR_NOTIFY}|{PR_OFF}|{PR_ON}|{PR_OPEN}|{PR_PARTY}|{PR_SCHEDULE}|{PR_SEL}|{PR_SENSOR}|{PR_SWITCH}|{PR_TEMP}|{PR_TIME}|{PR_TRUE}|{PR_WHEN}|{PR_WHILE}|{PR_YES}
+PALABRA_RESERVADA = {PR_AIR}|{PR_AT}|{PR_BEGIN}|{PR_BEGINPROC}|{PR_BEGINVAR}|{PR_BOOL}|{PR_BREAK}|{PR_CLOCK}|{PR_DEC}|{PR_DEF}|{PR_DISJOIN}|{PR_END}|{PR_ENDPROC}|{PR_ENDVAR}|{PR_FALSE}|{PR_FLOAT}|{PR_GATE}|{PR_INC}|{PR_INT}|{PR_IS}|{PR_JOIN}|{PR_LIGHTB}|{PR_MODE}|{PR_MODE}|{PR_NOT}|{PR_NOTIFY}|{PR_OFF}|{PR_ON}|{PR_OPEN}|{PR_PARTY}|{PR_SCHEDULE}|{PR_SEL}|{PR_SENSOR}|{PR_SWITCH}|{PR_TEMP}|{PR_TIME}|{PR_TRUE}|{PR_WHEN}|{PR_WHILE}|{PR_YES}|{PR_TO}
 PR_AIR = "AIR"
 PR_AT = "AT"
 PR_BEGIN = "BEGIN"
@@ -57,6 +57,7 @@ PR_SENSOR = "SENSOR"
 PR_SWITCH = "SWITCH"
 PR_TEMP = "TEMP"
 PR_TIME = "TIME"
+PR_TO = "TO"
 PR_TRUE = "TRUE"
 PR_WHEN = "WHEN"
 PR_WHILE = "WHILE"
@@ -76,7 +77,8 @@ Llave_Cierre = "}"
 Cor_Apertura = "["
 Cor_Cierre = "]"
 Car_Esp = "_"|","|"."|";"|":"|"#"|"?"
-
+Comilla = [\"]
+Cadena = {Comilla} {ComentariosContent} {Comilla}
 
 //Componentes Lexicos Variables
 Numero = {Digito}+
@@ -93,6 +95,7 @@ SaltoDeLinea = \n|\r|\r\n
 //Para los errores
 NUM_ERROR = ({Digito}+ {Letra}+ {Digito}*)+
 FLOAT_ERROR = {Flotante} ("."* {Digito})+
+TIME_ERROR = {TIEMPO_HORA} .+ {TIEMPO_MINUTOS}
 
 InputCharacter = [^\r\n]
 Comentarios = {TraditionalComentarios} | {EOLComentarios} | {DocumentationComentarios}
@@ -189,6 +192,11 @@ ComentariosContent = ( [^*] | \*+ [^/*] )*
     this._existenTokens = true;
     return t;
 }
+{Cadena} {
+    Tokens t = new Tokens (yytext(),"CADENA",yyline+1,yycolumn+1,true);
+    this._existenTokens = true;
+    return t;
+}
 {Car_Esp} {
     Tokens t = new Tokens (yytext(),"CAR_ESP",yyline+1,yycolumn+1,true);
     this._existenTokens = true;
@@ -207,17 +215,22 @@ ComentariosContent = ( [^*] | \*+ [^/*] )*
     return t;
 }
 {NUM_ERROR} {
-    Tokens t = new Tokens (yyline+1,yycolumn+1,true,"Número inválido ("+ yytext() +") en: " + yyline + ", columna: " + yycolumn);
+    Tokens t = new Tokens (yyline+1,yycolumn+1,true,2,"Error 2 (Léxico): Número inválido ("+ yytext() +") en fila: " + (yyline+1) + ", columna: " + (yycolumn+1));
     this._existenTokens = true;
     return t;
 }
 {FLOAT_ERROR} {
-    Tokens t = new Tokens (yyline+1,yycolumn+1,true,"Número flotante inválido ("+ yytext() +") en: " + yyline + ", columna: " + yycolumn);
+    Tokens t = new Tokens (yyline+1,yycolumn+1,true,3,"Error 3 (Léxico): Número flotante inválido ("+ yytext() +") en: " + (yyline+1) + ", columna: " + (yycolumn+1));
+    this._existenTokens = true;
+    return t;
+}
+{TIME_ERROR} {
+    Tokens t = new Tokens (yyline+1,yycolumn+1,true,3,"Error 4 (Léxico): Formato de tiempo inválido ("+ yytext() +") en: " + (yyline+1) + ", columna: " + (yycolumn+1));
     this._existenTokens = true;
     return t;
 }
 [^] {
-    Tokens t = new Tokens (yyline+1,yycolumn+1,true,"Caracter no válido ("+yytext()+") en línea: " + yyline + ", columna: " + yycolumn);
+    Tokens t = new Tokens (yyline+1,yycolumn+1,true,1,"Error 1 (Léxico):Caracter no válido ("+yytext()+") en línea: " + (yyline+1) + ", columna: " + (yycolumn+1));
     this._existenTokens = true;
     return t;
 }
