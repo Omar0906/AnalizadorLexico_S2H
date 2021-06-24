@@ -28,7 +28,7 @@ public class Tokens implements Comparable<Tokens> {
     this._token = "";
     this._column = column;
     this._row = row;
-    this._impr = false;
+    this._impr = true;
     this._error = error;
     this._msg = msg;
     this.errorCode = errorCode;

@@ -1,0 +1,34 @@
+/*Por el momento dejaremos el action code y parser code vacios esto se
+explicara mas a detalle en otra seccion del tutorial*/
+action code{::}
+parser code{::}
+
+/*Declaracion de variables no terminales*/
+non terminal COND, OREXP,ANDEXP,IGEXP,CMP,SIMBOLOSCOMPARAR,TIPO_DATO;
+/*DECLARACION DE VARIABLES TERMINALES */
+terminal or_,and_,igual_igual,no_igual,mayor, menor, mayor_igual,menor_igual,
+open_par,close_par,id,numero,true,false;
+Start with COND; // start with sirve para indicarle al parser con que produccion empezar
+COND::=OREXP;
+OREXP::=OREXP or_ ANDEXP
+    |ANDEXP;
+
+ANDEXP::=ANDEXP and_ IGEXP
+      |IGEXP;
+
+IGEXP::= IGEXP igual_igual CMP
+      |IGEXP no_igual CMP
+      |CMP;
+
+SIMBOLOS_COMPARAR::=mayor
+		|menor
+		|mayor_igual
+		|menor_igual;
+
+CMP::= CMP SIMBOLOS_COMPARAR TIPO_DATO
+      |TIPO_DATO
+      |open_par COND close_par ;
+TIPO_DATO::= id
+          |numero
+          |true
+          |false;

@@ -69,7 +69,7 @@ public class block extends javax.swing.JFrame {
         activar();
         // generar(ruta,ruta2,rutaS);
         manager();
-
+        //mnuAyudaG.setVisible(false);
     }
 
     public void manager() {
@@ -159,6 +159,7 @@ public class block extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLexico = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -187,8 +188,6 @@ public class block extends javax.swing.JFrame {
         btnTodos = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         btnEstilos = new javax.swing.JMenuItem();
-        mnuAyudaG = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         dBuscar.setTitle("Buscar");
         dBuscar.setAlwaysOnTop(true);
@@ -559,6 +558,19 @@ public class block extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Análisis Léxico", jScrollPane1);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 407, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 253, Short.MAX_VALUE)
+        );
+
+        jTabbedPane2.addTab("Análisis Sintáctico", jPanel1);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -812,19 +824,6 @@ public class block extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        mnuAyudaG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/if_164_QuestionMark_183285.png"))); // NOI18N
-        mnuAyudaG.setText("Ayuda");
-
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        mnuAyudaG.add(jMenuItem1);
-
-        jMenuBar1.add(mnuAyudaG);
-
         setJMenuBar(jMenuBar1);
 
         setBounds(0, 0, 918, 626);
@@ -885,7 +884,7 @@ public class block extends javax.swing.JFrame {
             if (eleccion == 0) {
                 try {
                     JFileChooser chooser = new JFileChooser();
-                    FileNameExtensionFilter filter = new FileNameExtensionFilter("Programa Speak2Home", "s2h");
+                    FileNameExtensionFilter filter = new FileNameExtensionFilter("Speak 2 Home (.s2h)", "s2h");
                     chooser.setFileFilter(filter);
                     chooser.setDialogTitle("Guardar");
                     chooser.setSelectedFile(new File(getTitle() + ".s2h"));
@@ -970,10 +969,10 @@ public class block extends javax.swing.JFrame {
     private void guardarComo() {
         try {
             JFileChooser chooser = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("Programa Speak2Home", "s2h");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Speak 2 Home (.s2h)", "s2h");
             chooser.setFileFilter(filter);
             chooser.setDialogTitle("Guardar");
-            chooser.setSelectedFile(new File(getTitle() + ".s2h"));
+            chooser.setSelectedFile(new File(getTitle()));
             int returnVal = chooser.showSaveDialog(this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File archivo = chooser.getSelectedFile();
@@ -1431,7 +1430,7 @@ public class block extends javax.swing.JFrame {
         }
         try {
             JFileChooser chooser = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("NombrePrograma", "s2h");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Speak 2 Home (.s2h)", "s2h");
             chooser.setFileFilter(filter);
             int returnVal = chooser.showOpenDialog(this);
             if (returnVal == JFileChooser.ABORT) {
@@ -1666,7 +1665,7 @@ public class block extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1678,7 +1677,6 @@ public class block extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lblBuscar;
-    private javax.swing.JMenu mnuAyudaG;
     private javax.swing.JRadioButton rbtnAbajo;
     private javax.swing.JRadioButton rbtnArriba;
     private javax.swing.JTable tblLexico;
