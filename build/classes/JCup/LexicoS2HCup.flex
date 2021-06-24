@@ -1,14 +1,17 @@
-package JFlex;
+package JCup;
+import java-cup-11b_runtime;
 %%
-%class LexicoS2H
+%class LexicoS2HCup
 %{//Código personalizado 
     private boolean _existenTokens = true;
     public boolean _existenTokens(){
         return this._existenTokens;
     }
+    
 %}
 %public
 %unicode
+%cup
 %line
 %column
 %type Tokens
@@ -96,8 +99,8 @@ SaltoDeLinea = \n|\r|\r\n
 //Para los errores
 NUM_ERROR = ({Digito}+ {Letra}+ {Digito}*)+
 FLOAT_ERROR = {Flotante} ("."* {Digito})+
-TIME_ERROR = {TIEMPO_HORA} .+ ":" .+ {TIEMPO_MINUTOS}
-PR_ERROR = ({Digito|Letra} {PALABRA_RESERVADA}) | ({PALABRA_RESERVADA} {Digito|Letra})
+TIME_ERROR = {TIEMPO_HORA} .+ {TIEMPO_MINUTOS}
+
 InputCharacter = [^\r\n]
 Comentarios = {TraditionalComentarios} | {EOLComentarios} | {DocumentationComentarios}
 TraditionalComentarios = "/#" [^*] ~"#/" | "/#" "#"+ "/"
@@ -226,11 +229,6 @@ ComentariosContent = ( [^*] | \*+ [^/*] )*
     return t;
 }
 {TIME_ERROR} {
-    Tokens t = new Tokens (yyline+1,yycolumn+1,true,3,"Error 4 (Léxico): Formato de tiempo inválido ("+ yytext() +") en: " + (yyline+1) + ", columna: " + (yycolumn+1));
-    this._existenTokens = true;
-    return t;
-}
-{PR_ERROR} {
     Tokens t = new Tokens (yyline+1,yycolumn+1,true,3,"Error 4 (Léxico): Formato de tiempo inválido ("+ yytext() +") en: " + (yyline+1) + ", columna: " + (yycolumn+1));
     this._existenTokens = true;
     return t;

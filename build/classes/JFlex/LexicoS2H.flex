@@ -1,3 +1,4 @@
+package JFlex;
 %%
 %class LexicoS2H
 %{//Código personalizado 
@@ -15,6 +16,7 @@
 %init{
 //Código que se ejecuta al inicio de la clase,
 %init}
+
 %eof{
     //Código que se ejecutará al final del proceso
     this._existenTokens = false;
@@ -95,8 +97,8 @@ SaltoDeLinea = \n|\r|\r\n
 //Para los errores
 NUM_ERROR = ({Digito}+ {Letra}+ {Digito}*)+
 FLOAT_ERROR = {Flotante} ("."* {Digito})+
-TIME_ERROR = {TIEMPO_HORA} .+ {TIEMPO_MINUTOS}
-
+TIME_ERROR = {TIEMPO_HORA} .+ ":" .+ {TIEMPO_MINUTOS}
+PR_ERROR = {Digito|Letra} {PALABRA_RESERVADA} | {PALABRA_RESERVADA} {Digito|Letra}
 InputCharacter = [^\r\n]
 Comentarios = {TraditionalComentarios} | {EOLComentarios} | {DocumentationComentarios}
 TraditionalComentarios = "/#" [^*] ~"#/" | "/#" "#"+ "/"
@@ -225,6 +227,11 @@ ComentariosContent = ( [^*] | \*+ [^/*] )*
     return t;
 }
 {TIME_ERROR} {
+    Tokens t = new Tokens (yyline+1,yycolumn+1,true,3,"Error 4 (Léxico): Formato de tiempo inválido ("+ yytext() +") en: " + (yyline+1) + ", columna: " + (yycolumn+1));
+    this._existenTokens = true;
+    return t;
+}
+{PR_ERROR} {
     Tokens t = new Tokens (yyline+1,yycolumn+1,true,3,"Error 4 (Léxico): Formato de tiempo inválido ("+ yytext() +") en: " + (yyline+1) + ", columna: " + (yycolumn+1));
     this._existenTokens = true;
     return t;
